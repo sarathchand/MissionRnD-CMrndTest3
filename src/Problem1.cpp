@@ -50,7 +50,50 @@ struct node{
 	struct node *right;
 };
 
+void inorder_link(node * root, int *sum);
+int inorder(struct node *root);
 
 int get_missing_value(struct node *root,int n){
-    return -1;
+	int p;
+	if (root != NULL)
+	{
+		p = inorder(root);
+		return((n*(n + 1) / 2) - p);
+	}
+	else
+	{
+		return -1;
+
+	}
+
+
+	
 }
+
+
+void inorder_link(node * root,int *sum){
+
+	if (root == NULL)
+	{
+		return;
+	}
+	inorder_link(root->left,sum);
+	*sum = *sum + (root->data);
+	inorder_link(root->right,sum);
+}
+
+
+int inorder(struct node *root){
+	if (root == NULL){
+		return 0;
+	}
+	int sum = 0;
+	inorder_link(root,&sum);
+	return sum;
+
+
+}
+
+
+
+
